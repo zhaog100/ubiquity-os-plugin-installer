@@ -1,0 +1,81 @@
+# Code Review Premade Configuration
+# Focused on code review, automated checks, and engineering team workflows
+# Last updated: 2025-01
+
+_metadata:
+  name: code-review
+  description: "Code review focused configuration with review plugins and automated checks for engineering teams"
+  version: "1.0.0"
+  target: "Engineering teams focused on code quality and review workflows"
+
+plugins:
+  - skipBotEvents: false
+    uses:
+      - plugin: https://ubiquity-os-command-start-stop-development.ubiquity.workers.dev
+        with:
+          reviewDelayTolerance: "2 Days"
+          taskStaleTimeoutDuration: "14 Days"
+          startRequiresWallet: false
+          maxConcurrentTasks:
+            member: 5
+            contributor: 3
+          emptyWalletText: "Please set your wallet address with the /wallet command first and try again."
+          rolesWithReviewAuthority:
+            - COLLABORATOR
+            - OWNER
+            - MEMBER
+            - ADMIN
+          requiredLabelsToStart:
+            - "Priority: 1 (Normal)"
+            - "Priority: 2 (Medium)"
+            - "Priority: 3 (High)"
+            - "Priority: 4 (Urgent)"
+            - "Priority: 5 (Emergency)"
+
+  - uses:
+      - plugin: ubiquity-os-marketplace/text-conversation-rewards@development
+        skipBotEvents: false
+        with:
+          logLevel: "info"
+          evmNetworkId: 100
+          evmPrivateEncrypted: ""
+          erc20RewardToken: "0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d"
+          incentives:
+            requirePriceLabel: true
+            contentEvaluator: {}
+            userExtractor:
+              enabled: true
+              redeemTask: true
+            dataPurge: {}
+            formattingEvaluator:
+              wordCountExponent: 0.85
+            permitGeneration:
+              enabled: true
+            githubComment:
+              post: true
+              debug: false
+          dataCollection:
+            maxAttempts: 10
+            delayMs: 1000
+
+  - uses:
+      - plugin: https://ubiquity-os-daemon-pricing-development.ubiquity.workers.dev
+        with:
+          labels:
+            time:
+              - "Time: <15 Minutes"
+              - "Time: <1 Hour"
+              - "Time: <2 Hours"
+              - "Time: <4 Hours"
+              - "Time: <1 Day"
+              - "Time: <1 Week"
+            priority:
+              - "Priority: 1 (Normal)"
+              - "Priority: 2 (Medium)"
+              - "Priority: 3 (High)"
+              - "Priority: 4 (Urgent)"
+              - "Priority: 5 (Emergency)"
+          basePriceMultiplier: 1.5
+          publicAccessControl:
+            setLabel: true
+            fundExternalClosedIssue: false

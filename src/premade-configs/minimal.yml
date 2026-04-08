@@ -1,0 +1,55 @@
+# Minimal Premade Configuration
+# Only essential plugins for organizations that want the bare minimum
+# Last updated: 2025-01
+
+_metadata:
+  name: minimal
+  description: "Minimal configuration with only essential plugins (start/stop, comments)"
+  version: "1.0.0"
+  target: "Organizations that want bare minimum functionality"
+
+plugins:
+  - skipBotEvents: false
+    uses:
+      - plugin: https://ubiquity-os-command-start-stop-development.ubiquity.workers.dev
+        with:
+          reviewDelayTolerance: "3 Days"
+          taskStaleTimeoutDuration: "30 Days"
+          startRequiresWallet: true
+          maxConcurrentTasks:
+            member: 2
+            contributor: 2
+          emptyWalletText: "Please set your wallet address with the /wallet command first and try again."
+          rolesWithReviewAuthority:
+            - COLLABORATOR
+            - OWNER
+            - MEMBER
+            - ADMIN
+          requiredLabelsToStart:
+            - "Priority: 3 (High)"
+            - "Priority: 4 (Urgent)"
+            - "Priority: 5 (Emergency)"
+
+  - uses:
+      - plugin: ubiquity-os-marketplace/text-conversation-rewards@development
+        skipBotEvents: false
+        with:
+          logLevel: "debug"
+          evmNetworkId: 100
+          evmPrivateEncrypted: ""
+          erc20RewardToken: "0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d"
+          incentives:
+            requirePriceLabel: true
+            contentEvaluator: {}
+            userExtractor:
+              enabled: true
+              redeemTask: true
+            dataPurge: {}
+            permitGeneration:
+              enabled: true
+            githubComment:
+              post: true
+              debug: false
+          dataCollection:
+            maxAttempts: 10
+            delayMs: 1000

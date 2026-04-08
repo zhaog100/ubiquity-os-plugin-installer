@@ -1,0 +1,81 @@
+# Standard Premade Configuration
+# Full battle-tested setup for organizations that want everything
+# Last updated: 2025-01
+
+_metadata:
+  name: standard
+  description: "Full battle-tested configuration with all plugins enabled and sensible defaults"
+  version: "1.0.0"
+  target: "Organizations that want the complete UbiquityOS experience"
+
+plugins:
+  - uses:
+      - plugin: ubiquity-os-marketplace/text-conversation-rewards@development
+        skipBotEvents: false
+        with:
+          logLevel: "debug"
+          evmNetworkId: 100
+          evmPrivateEncrypted: ""
+          erc20RewardToken: "0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d"
+          incentives:
+            requirePriceLabel: true
+            contentEvaluator: {}
+            userExtractor:
+              enabled: true
+              redeemTask: true
+            dataPurge: {}
+            formattingEvaluator:
+              wordCountExponent: 0.85
+            permitGeneration:
+              enabled: true
+            githubComment:
+              post: true
+              debug: false
+          dataCollection:
+            maxAttempts: 10
+            delayMs: 1000
+
+  - skipBotEvents: false
+    uses:
+      - plugin: https://ubiquity-os-command-start-stop-development.ubiquity.workers.dev
+        with:
+          reviewDelayTolerance: "3 Days"
+          taskStaleTimeoutDuration: "30 Days"
+          startRequiresWallet: true
+          maxConcurrentTasks:
+            member: 2
+            contributor: 2
+          emptyWalletText: "Please set your wallet address with the /wallet command first and try again."
+          rolesWithReviewAuthority:
+            - COLLABORATOR
+            - OWNER
+            - MEMBER
+            - ADMIN
+          requiredLabelsToStart:
+            - "Priority: 3 (High)"
+            - "Priority: 4 (Urgent)"
+            - "Priority: 5 (Emergency)"
+
+  - uses:
+      - plugin: https://ubiquity-os-daemon-pricing-development.ubiquity.workers.dev
+        with:
+          labels:
+            time:
+              - "Time: <15 Minutes"
+              - "Time: <1 Hour"
+              - "Time: <2 Hours"
+              - "Time: <4 Hours"
+              - "Time: <1 Day"
+              - "Time: <1 Week"
+              - "Time: <2 Weeks"
+              - "Time: <1 Month"
+            priority:
+              - "Priority: 1 (Normal)"
+              - "Priority: 2 (Medium)"
+              - "Priority: 3 (High)"
+              - "Priority: 4 (Urgent)"
+              - "Priority: 5 (Emergency)"
+          basePriceMultiplier: 2
+          publicAccessControl:
+            setLabel: true
+            fundExternalClosedIssue: false
