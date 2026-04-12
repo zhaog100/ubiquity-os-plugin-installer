@@ -1,0 +1,36 @@
+{
+  "name": "Open Source Project",
+  "description": "Essential plugins for managing open source projects with bounty tracking and contributor rewards.",
+  "category": "partner",
+  "plugins": {
+    "command-start-stop": {
+      "plugin": "https://ubiquity-os-command-start-stop-development.ubiquity.workers.dev",
+      "with": {
+        "reviewDelayTolerance": "3 Days",
+        "taskStaleTimeoutDuration": "30 Days",
+        "startRequiresWallet": true,
+        "maxConcurrentTasks": {
+          "member": 2,
+          "contributor": 2
+        },
+        "emptyWalletText": "Please set your wallet address with the /wallet command first and try again.",
+        "rolesWithReviewAuthority": ["COLLABORATOR", "OWNER", "MEMBER", "ADMIN"],
+        "requiredLabelsToStart": ["Priority: 3 (High)", "Priority: 4 (Urgent)", "Priority: 5 (Emergency)"]
+      }
+    },
+    "daemon-pricing": {
+      "plugin": "https://ubiquity-os-daemon-pricing-development.ubiquity.workers.dev",
+      "with": {
+        "labels": {
+          "time": ["Time: <15 Minutes", "Time: <1 Hour", "Time: <2 Hours", "Time: <4 Hours", "Time: <1 Day", "Time: <1 Week"],
+          "priority": ["Priority: 1 (Normal)", "Priority: 2 (Medium)", "Priority: 3 (High)", "Priority: 4 (Urgent)", "Priority: 5 (Emergency)"]
+        },
+        "basePriceMultiplier": 2,
+        "publicAccessControl": {
+          "setLabel": true,
+          "fundExternalClosedIssue": false
+        }
+      }
+    }
+  }
+}

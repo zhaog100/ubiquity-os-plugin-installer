@@ -2,6 +2,7 @@ import { createElement } from "../../utils/element-helpers";
 import { STRINGS } from "../../utils/strings";
 import { toastNotification } from "../../utils/toaster";
 import { configTemplateHandler } from "../predefined-configs/template-handler";
+import { renderPremadeConfigSelector } from "../predefined-configs/premade-config-handler";
 import { ManifestRenderer } from "../render-manifest";
 import { controlButtons } from "./control-buttons";
 import { renderPluginSelector } from "./plugin-select";
@@ -19,6 +20,11 @@ export function renderTemplateSelector(renderer: ManifestRenderer): void {
   templateCell.className = STRINGS.TDV_CENTERED;
 
   const templateButtons = createElement("div", { class: "template-buttons" });
+
+  const premadeButton = createElement("button", { textContent: "Premade Configs", class: "template-btn-premade" });
+  premadeButton.addEventListener("click", () => {
+    renderPremadeConfigSelector(renderer);
+  });
 
   const minimalButton = createElement("button", { textContent: "Minimal" });
   minimalButton.addEventListener("click", () => {
@@ -39,6 +45,7 @@ export function renderTemplateSelector(renderer: ManifestRenderer): void {
     fetchOrgConfig(renderer, selectedOrg).catch(console.error);
   });
 
+  templateButtons.appendChild(premadeButton);
   templateButtons.appendChild(minimalButton);
   templateButtons.appendChild(fullDefaultButton);
   templateButtons.appendChild(customButton);

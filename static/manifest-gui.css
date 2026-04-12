@@ -779,3 +779,79 @@ textarea.config-input {
     url(./fonts/ubiquity-nova-standard.woff) format("woff"),
     url(./fonts/ubiquity-nova-standard.ttf) format("truetype");
 } */
+
+/* Premade Config Styles */
+.premade-category-header {
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 12px 16px 4px;
+  color: #a0a0a0;
+  text-align: left;
+}
+
+.premade-config-row {
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.premade-config-row:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.premade-config-cell {
+  padding: 8px 16px;
+}
+
+.premade-config-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.premade-config-info {
+  flex: 1;
+}
+
+.premade-config-name {
+  margin: 0 0 4px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.premade-config-desc {
+  margin: 0 0 6px;
+  font-size: 0.85em;
+  color: #a0a0a0;
+}
+
+.premade-config-badge {
+  display: inline-block;
+  font-size: 0.75em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #c0c0c0;
+}
+
+.premade-apply-btn {
+  padding: 6px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: all 0.15s;
+  margin-left: 16px;
+}
+
+.premade-apply-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.template-btn-premade {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border-color: transparent !important;
+}

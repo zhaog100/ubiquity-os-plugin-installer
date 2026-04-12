@@ -1,0 +1,22 @@
+{
+  "name": "Minimal Starter",
+  "description": "Bare minimum configuration to get started with UbiquityOS task management.",
+  "category": "starter",
+  "plugins": {
+    "command-start-stop": {
+      "plugin": "https://ubiquity-os-command-start-stop-development.ubiquity.workers.dev",
+      "with": {
+        "reviewDelayTolerance": "3 Days",
+        "taskStaleTimeoutDuration": "30 Days",
+        "startRequiresWallet": true,
+        "maxConcurrentTasks": {
+          "member": 2,
+          "contributor": 2
+        },
+        "emptyWalletText": "Please set your wallet address with the /wallet command first and try again.",
+        "rolesWithReviewAuthority": ["COLLABORATOR", "OWNER", "ADMIN"],
+        "requiredLabelsToStart": ["Priority: 3 (High)", "Priority: 4 (Urgent)", "Priority: 5 (Emergency)"]
+      }
+    }
+  }
+}

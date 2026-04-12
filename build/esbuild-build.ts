@@ -1,6 +1,16 @@
 import * as dotenv from "dotenv";
 import esbuild, { BuildOptions } from "esbuild";
 import MINIMAL_PREDEFINED_CONFIG from "../static/minimal-predefined.json";
+import openSourceProject from "../static/premade-configs/open-source-project.json";
+import bountyHunter from "../static/premade-configs/bounty-hunter.json";
+import minimalStarter from "../static/premade-configs/minimal-starter.json";
+
+const PREMADE_CONFIGS = {
+  "open-source-project": openSourceProject,
+  "bounty-hunter": bountyHunter,
+  "minimal-starter": minimalStarter,
+};
+
 dotenv.config();
 
 const ENTRY_POINTS = {
@@ -19,6 +29,7 @@ export const esbuildOptions: BuildOptions = {
   outdir: "static/dist",
   define: createEnvDefines([], {
     MINIMAL_PREDEFINED_CONFIG: JSON.stringify(MINIMAL_PREDEFINED_CONFIG),
+    PREMADE_CONFIGS: JSON.stringify(PREMADE_CONFIGS),
     SUPABASE_STORAGE_KEY: generateSupabaseStorageKey(),
     NODE_ENV: process.env.NODE_ENV || "development",
     SUPABASE_URL: process.env.SUPABASE_URL || "https://wfzpewmlyiozupulbuur.supabase.co",
